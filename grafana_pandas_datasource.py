@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, json, abort
 from flask_cors import CORS, cross_origin
 
 import pandas as pd
+import numpy as np
 
 app = Flask(__name__)
 
@@ -35,14 +36,17 @@ def add_panel_reader(name, reader):
 @app.route('/', methods=methods)
 @cross_origin()
 def hello_world():
-    print request.headers, request.get_json()
+    print(request.headers, request.get_json())
     return 'Jether\'s python Grafana datasource, used for rendering HTML panels and timeseries data.'
 
 @app.route('/search', methods=methods)
 @cross_origin()
 def find_metrics():
-    print request.headers, request.get_json()
+    print (request.headers, request.get_json())
     req = request.get_json()
+
+    print("type " ,type(request))
+
 
     target = req.get('target', '*')
 
@@ -54,7 +58,8 @@ def find_metrics():
     if not target or finder not in metric_finders:
         metrics = []
         if target == '*':
-            metrics += metric_finders.keys() + metric_readers.keys()
+            metrics += list(metric_finders.keys())
+            metrics += list(metric_readers.keys())
         else:
             metrics.append(target)
 
@@ -71,7 +76,7 @@ def dataframe_to_response(target, df, freq=None):
 
     if freq is not None:
         orig_tz = df.index.tz
-        df = df.tz_convert('UTC').resample(rule=freq, label='right', closed='right', how='mean').tz_convert(orig_tz)
+        df = df.tz_convert('UTC').resample(rule=freq, label='right', closed='right').mean().tz_convert(orig_tz)
 
     if isinstance(df, pd.Series):
         response.append(_series_to_response(df, target))
@@ -82,7 +87,6 @@ def dataframe_to_response(target, df, freq=None):
         abort(404, Exception('Received object is not a dataframe or series.'))
 
     return response
-
 
 def dataframe_to_json_table(target, df):
     response = []
@@ -98,7 +102,6 @@ def dataframe_to_json_table(target, df):
         abort(404, Exception('Received object is not a dataframe.'))
 
     return response
-
 
 def annotations_to_response(target, df):
     response = []
@@ -145,7 +148,6 @@ def _series_to_annotations(df, target):
     return {'target': '%s' % (df.name),
             'datapoints': zip(values, timestamps)}
 
-
 def _series_to_response(df, target):
     if df.empty:
         return {'target': '%s' % (target),
@@ -161,13 +163,13 @@ def _series_to_response(df, target):
     values = sorted_df.values.tolist()
 
     return {'target': '%s' % (df.name),
-            'datapoints': zip(values, timestamps)}
+            'datapoints': list(zip(values, timestamps))}
 
 
 @app.route('/query', methods=methods)
 @cross_origin(max_age=600)
 def query_metrics():
-    print request.headers, request.get_json()
+    print (request.headers, request.get_json())
     req = request.get_json()
 
     results = []
@@ -200,7 +202,7 @@ def query_metrics():
 @app.route('/annotations', methods=methods)
 @cross_origin(max_age=600)
 def query_annotations():
-    print request.headers, request.get_json()
+    print (request.headers, request.get_json())
     req = request.get_json()
 
     results = []
@@ -222,7 +224,7 @@ def query_annotations():
 @app.route('/panels', methods=methods)
 @cross_origin()
 def get_panel():
-    print request.headers, request.get_json()
+    print (request.headers, request.get_json())
     req = request.args
 
     ts_range = {'$gt': pd.Timestamp(int(req['from']), unit='ms').to_pydatetime(),
@@ -237,15 +239,15 @@ def get_panel():
     return panel_readers[finder](target, ts_range)
 
 
+# Sample timeseries reader : 
+def get_sine(freq, ts_range):
+        freq = int(freq)
+        ts = pd.date_range(ts_range['$gt'], ts_range['$lte'], freq='H')
+        return pd.Series(np.sin(np.arange(len(ts)) * np.pi * freq * 2 / float(len(ts))), index=ts).to_frame('value')
+
+# To query the wanted reader, use `<reader_name>:<query_string>`, e.g. 'sine_wave:24' 
+add_annotation_reader('midnights', lambda query_string, ts_range: pd.Series(index=pd.date_range(ts_range['$gt'], ts_range['$lte'], freq='D', normalize=True)).fillna('Text for annotation - midnight'))
+add_reader('sine_wave', get_sine)
+
 if __name__ == '__main__':
-    # Sample annotation reader : add_annotation_reader('midnights', lambda query_string, ts_range: pd.Series(index=pd.date_range(ts_range['$gt'], ts_range['$lte'], freq='D', normalize=True)).fillna('Text for annotation - midnight'))
-    # Sample timeseries reader : 
-    #    def get_sine(freq, ts_range):
-    #            freq = int(freq)
-    #            ts = pd.date_range(ts_range['$gt'], ts_range['$lte'], freq='H')
-    #            return pd.Series(np.sin(np.arange(len(ts)) * np.pi * freq * 2 / float(len(ts))), index=ts).to_frame('value')
-    #    add_reader('sine_wave', get_sine)
-
-    # To query the wanted reader, use `<reader_name>:<query_string>`, e.g. 'sine_wave:24' 
-
     app.run(host='0.0.0.0', port=3003, debug=True)
