@@ -2,6 +2,8 @@ from flask import Flask, request, jsonify, json, abort
 from flask_cors import CORS, cross_origin
 
 import pandas as pd
+import numpy as np
+
 
 app = Flask(__name__)
 
@@ -167,8 +169,13 @@ def _series_to_response(df, target):
 @app.route('/query', methods=methods)
 @cross_origin(max_age=600)
 def query_metrics():
+    print request
     print request.headers, request.get_json()
     req = request.get_json()
+
+    #req = request.args
+    print req
+
 
     results = []
 
@@ -225,6 +232,8 @@ def get_panel():
     print request.headers, request.get_json()
     req = request.args
 
+    print req
+
     ts_range = {'$gt': pd.Timestamp(int(req['from']), unit='ms').to_pydatetime(),
                 '$lte': pd.Timestamp(int(req['to']), unit='ms').to_pydatetime()}
 
@@ -237,15 +246,38 @@ def get_panel():
     return panel_readers[finder](target, ts_range)
 
 
-if __name__ == '__main__':
-    # Sample annotation reader : add_annotation_reader('midnights', lambda query_string, ts_range: pd.Series(index=pd.date_range(ts_range['$gt'], ts_range['$lte'], freq='D', normalize=True)).fillna('Text for annotation - midnight'))
-    # Sample timeseries reader : 
-    #    def get_sine(freq, ts_range):
-    #            freq = int(freq)
-    #            ts = pd.date_range(ts_range['$gt'], ts_range['$lte'], freq='H')
-    #            return pd.Series(np.sin(np.arange(len(ts)) * np.pi * freq * 2 / float(len(ts))), index=ts).to_frame('value')
-    #    add_reader('sine_wave', get_sine)
+def html_test(target, ts_range):
+   return """
+     <!DOCTYPE html>
+     <html>
+     <head>
+     <title>This is HTML content displayed on a Grafana panel</title>
+     </head>
+     <body>
 
-    # To query the wanted reader, use `<reader_name>:<query_string>`, e.g. 'sine_wave:24' 
+     <h1>Bokeh test</h1>
+     <p>Passed parameter is %d</p>
+
+     </body>
+     </html>
+    """ % (int(target),)
+
+
+
+if __name__ == '__main__':
+    # Sample annotation reader :
+    add_annotation_reader('midnights', lambda query_string, ts_range: pd.Series(index=pd.date_range(ts_range['$gt'], ts_range['$lte'], freq='D', normalize=True)).fillna('Text for annotation - midnight'))
+    # Sample timeseries reader :
+    def get_sine(freq, ts_range):
+        freq = int(freq)
+        ts = pd.date_range(ts_range['$gt'], ts_range['$lte'], freq='H')
+        df = pd.Series(np.sin(np.arange(len(ts)) * np.pi * freq * 2 / float(len(ts))), index=ts).to_frame('value')
+        print df
+        return df
+    add_reader('sine_wave', get_sine)
+
+    # To query the wanted reader, use `<reader_name>:<query_string>`, e.g. 'sine_wave:24'
+
+    add_panel_reader('html', html_test)
 
     app.run(host='0.0.0.0', port=3003, debug=True)
