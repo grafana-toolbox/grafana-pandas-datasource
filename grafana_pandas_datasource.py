@@ -35,13 +35,14 @@ def add_panel_reader(name, reader):
 @app.route('/', methods=methods)
 @cross_origin()
 def hello_world():
-    print request.headers, request.get_json()
+    print(request.headers, request.get_json())
     return 'Jether\'s python Grafana datasource, used for rendering HTML panels and timeseries data.'
+
 
 @app.route('/search', methods=methods)
 @cross_origin()
 def find_metrics():
-    print request.headers, request.get_json()
+    print(request.headers, request.get_json())
     req = request.get_json()
 
     target = req.get('target', '*')
@@ -133,6 +134,7 @@ def annotations_to_response(target, df):
 
     return response
 
+
 def _series_to_annotations(df, target):
     if df.empty:
         return {'target': '%s' % (target),
@@ -167,7 +169,7 @@ def _series_to_response(df, target):
 @app.route('/query', methods=methods)
 @cross_origin(max_age=600)
 def query_metrics():
-    print request.headers, request.get_json()
+    print(request.headers, request.get_json())
     req = request.get_json()
 
     results = []
@@ -200,7 +202,7 @@ def query_metrics():
 @app.route('/annotations', methods=methods)
 @cross_origin(max_age=600)
 def query_annotations():
-    print request.headers, request.get_json()
+    print(request.headers, request.get_json())
     req = request.get_json()
 
     results = []
@@ -222,7 +224,7 @@ def query_annotations():
 @app.route('/panels', methods=methods)
 @cross_origin()
 def get_panel():
-    print request.headers, request.get_json()
+    print(request.headers, request.get_json())
     req = request.args
 
     ts_range = {'$gt': pd.Timestamp(int(req['from']), unit='ms').to_pydatetime(),
