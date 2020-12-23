@@ -1,6 +1,13 @@
-from flask import Flask, request, jsonify, json, abort
-from flask_cors import CORS, cross_origin
+"""
+A REST API based on Flask for serving Pandas Dataframes to Grafana.
 
+The idea is to use ``flask_restful`` and create a Blueprint to be
+used by a parent project (i.e. a larger API project where ``/grafana/``
+endpoints are used by Grafana's SimpleJson plugin).
+"""
+
+from flask import Flask, request, jsonify, abort
+from flask_cors import CORS, cross_origin
 import pandas as pd
 
 app = Flask(__name__)
