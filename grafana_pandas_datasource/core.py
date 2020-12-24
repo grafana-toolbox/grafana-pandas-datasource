@@ -31,7 +31,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 methods = ('GET', 'POST')
 
-metric_finders= {}
+metric_finders = {}
 metric_readers = {}
 annotation_readers = {}
 panel_readers = {}
@@ -57,7 +57,7 @@ def add_panel_reader(name, reader):
 @cross_origin()
 def hello_world():
     print(request.headers, request.get_json())
-    return 'Jether\'s python Grafana datasource, used for rendering HTML panels and timeseries data.'
+    return 'Jether\'s Grafana Pandas Datasource, used for rendering HTML panels and timeseries data.'
 
 
 @app.route('/search', methods=methods)
@@ -260,15 +260,5 @@ def get_panel():
     return panel_readers[finder](target, ts_range)
 
 
-if __name__ == '__main__':
-    # Sample annotation reader : add_annotation_reader('midnights', lambda query_string, ts_range: pd.Series(index=pd.date_range(ts_range['$gt'], ts_range['$lte'], freq='D', normalize=True)).fillna('Text for annotation - midnight'))
-    # Sample timeseries reader : 
-    #    def get_sine(freq, ts_range):
-    #            freq = int(freq)
-    #            ts = pd.date_range(ts_range['$gt'], ts_range['$lte'], freq='H')
-    #            return pd.Series(np.sin(np.arange(len(ts)) * np.pi * freq * 2 / float(len(ts))), index=ts).to_frame('value')
-    #    add_reader('sine_wave', get_sine)
-
-    # To query the wanted reader, use `<reader_name>:<query_string>`, e.g. 'sine_wave:24' 
-
-    app.run(host='0.0.0.0', port=3003, debug=True)
+def get_application():
+    return app
