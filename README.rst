@@ -22,6 +22,8 @@ Resources
 *******
 Example
 *******
+This is a demo program which generates a sine wave for data and
+annotations for designating midnight times. For both, we are using NumPy.
 
 .. figure:: https://user-images.githubusercontent.com/453543/103137119-78dab480-46c6-11eb-829f-6aa957239804.png
 
@@ -53,7 +55,7 @@ Configure
 =========
 .. note::
 
-    The host where this service is running can be accessed from the
+    The host where the datasource service is running can be accessed from the
     Grafana Docker container using the hostname ``host.docker.internal``.
 
 You can have a quickstart by putting ``examples/sinewave-midnights/datasource.json``
