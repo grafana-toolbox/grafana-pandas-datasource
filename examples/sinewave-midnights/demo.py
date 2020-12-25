@@ -7,7 +7,7 @@ To query the reader, use ``<reader_name>:<query_string>``, e.g.
 """
 import pandas as pd
 import numpy as np
-from grafana_pandas_datasource.core import get_application, add_reader, add_annotation_reader
+from grafana_pandas_datasource.service import get_application, add_reader, add_annotation_reader
 
 
 def main():

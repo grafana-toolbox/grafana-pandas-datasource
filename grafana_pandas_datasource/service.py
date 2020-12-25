@@ -1,4 +1,12 @@
 """
+A REST API based on Flask for serving Pandas Dataframes to Grafana.
+
+The idea is to use ``flask_restful`` and create a Blueprint to be
+used by a parent project (i.e. a larger API project where ``/grafana/``
+endpoints are used by Grafana's SimpleJson plugin).
+
+----
+
 Copyright 2017 Linar <linar@jether-energy.com>
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,13 +20,6 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-"""
-"""
-A REST API based on Flask for serving Pandas Dataframes to Grafana.
-
-The idea is to use ``flask_restful`` and create a Blueprint to be
-used by a parent project (i.e. a larger API project where ``/grafana/``
-endpoints are used by Grafana's SimpleJson plugin).
 """
 from flask import Flask, request, jsonify, abort
 from flask_cors import CORS, cross_origin
