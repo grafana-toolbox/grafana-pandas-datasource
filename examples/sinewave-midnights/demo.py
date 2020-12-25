@@ -16,7 +16,7 @@ def main():
     add_annotation_reader(
         'midnights',
         lambda query_string, ts_range:
-            pd.Series(index=pd.date_range(ts_range['$gt'], ts_range['$lte'], freq='D', normalize=True)).fillna('Text for annotation - midnight'))
+            pd.Series(index=pd.date_range(ts_range['$gt'], ts_range['$lte'], freq='D', normalize=True), dtype='float64').fillna('Text for annotation - midnight'))
 
     # Sample timeseries reader.
     def get_sine(freq, ts_range):

@@ -23,6 +23,7 @@ endpoints are used by Grafana's SimpleJson plugin).
 from flask import Flask, request, jsonify, abort
 from flask_cors import CORS, cross_origin
 import pandas as pd
+import numpy as np
 
 app = Flask(__name__)
 
@@ -93,7 +94,7 @@ def dataframe_to_response(target, df, freq=None):
 
     if freq is not None:
         orig_tz = df.index.tz
-        df = df.tz_convert('UTC').resample(rule=freq, label='right', closed='right', how='mean').tz_convert(orig_tz)
+        df = df.tz_convert('UTC').resample(rule=freq, label='right', closed='right').mean().tz_convert(orig_tz)
 
     if isinstance(df, pd.Series):
         response.append(_series_to_response(df, target))
@@ -166,7 +167,7 @@ def _series_to_annotations(df, target):
     values = sorted_df.values.tolist()
 
     return {'target': '%s' % (df.name),
-            'datapoints': zip(values, timestamps)}
+            'datapoints': list(zip(values, timestamps))}
 
 
 def _series_to_response(df, target):
@@ -176,15 +177,12 @@ def _series_to_response(df, target):
 
     sorted_df = df.dropna().sort_index()
 
-    try:
-        timestamps = (sorted_df.index.astype(pd.np.int64) // 10 ** 6).values.tolist() # New pandas version
-    except:
-        timestamps = (sorted_df.index.astype(pd.np.int64) // 10 ** 6).tolist()
+    timestamps = (sorted_df.index.astype(np.int64) // 10 ** 6).values.tolist()
 
     values = sorted_df.values.tolist()
 
     return {'target': '%s' % (df.name),
-            'datapoints': zip(values, timestamps)}
+            'datapoints': list(zip(values, timestamps))}
 
 
 @app.route('/query', methods=methods)
