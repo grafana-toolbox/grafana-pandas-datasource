@@ -1,0 +1,19 @@
+{
+  "access": "proxy",
+  "basicAuth": false,
+  "basicAuthPassword": "",
+  "basicAuthUser": "",
+  "database": "",
+  "isDefault": false,
+  "jsonData": {},
+  "name": "sinewave-midnights",
+  "orgId": 1,
+  "password": "",
+  "readOnly": true,
+  "secureJsonFields": {},
+  "type": "grafana-simple-json-datasource",
+  "typeLogoUrl": "",
+  "url": "http://host.docker.internal:3003",
+  "user": "",
+  "withCredentials": false
+}
