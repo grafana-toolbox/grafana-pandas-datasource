@@ -67,7 +67,7 @@ and ``examples/sinewave-midnights/dashboard.json`` into Grafana::
 
     # Login to Grafana.
     export GRAFANA_URL=http://localhost:3000
-    http --session=grafana $GRAFANA_URL --auth=admin:admin
+    http --session=grafana ${GRAFANA_URL} --auth=admin:admin
 
     # Create datasource.
     cat examples/sinewave-midnights/datasource.json | \
