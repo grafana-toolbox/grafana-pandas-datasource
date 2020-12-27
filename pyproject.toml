@@ -1,0 +1,72 @@
+[tool.poetry]
+name = "grafana-pandas-datasource"
+version = "0.1.0"
+description = "Serve Pandas dataframes to Grafana"
+authors = [
+    "Linar <linar@jether-energy.com>",
+    "Andreas Motl <andreas.motl@panodata.org>"
+]
+license = "Apache 2"
+readme = "README.rst"
+include = [
+    "LICENSE",
+    "CHANGES.rst"
+]
+homepage = "https://community.panodata.org/t/grafana-python-datasource-using-pandas-for-timeseries-and-table-data/148"
+repository = "https://github.com/panodata/grafana-pandas-datasource"
+
+keywords = [
+    "grafana",
+    "pandas",
+    "datasource",
+    "grafana-plugin",
+    "grafana-datasource",
+    "pandas-dataframe"
+]
+classifiers = [
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "License :: OSI Approved :: Apache Software License",
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: System Administrators",
+    "Topic :: Communications",
+    "Topic :: Database",
+    "Topic :: Internet",
+    "Topic :: Internet :: WWW/HTTP :: Indexing/Search",
+    "Topic :: Scientific/Engineering :: Atmospheric Science",
+    "Topic :: Scientific/Engineering :: GIS",
+    "Topic :: Scientific/Engineering :: Human Machine Interfaces",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Scientific/Engineering :: Interface Engine/Protocol Translator",
+    "Topic :: Scientific/Engineering :: Visualization",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: System :: Archiving",
+    "Topic :: Text Processing",
+    "Topic :: Utilities",
+    "Operating System :: POSIX",
+    "Operating System :: Unix",
+    "Operating System :: MacOS"
+]
+
+[tool.poetry.urls]
+"Issues" = "https://github.com/panodata/grafana-pandas-datasource/issues"
+
+[tool.poetry.dependencies]
+python = "^3.6.1"
+pandas = "^1.1.2"
+numpy = "^1.19.2"
+flask = "^1.1.2"
+flask-cors = "^3.0.9"
+
+[build-system]
+requires = ["poetry_core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
