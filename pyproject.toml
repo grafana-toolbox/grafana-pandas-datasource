@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "grafana-pandas-datasource"
-version = "0.1.0"
+version = "0.1.1"
 description = "Serve Pandas dataframes to Grafana"
 authors = [
     "Linar <linar@jether-energy.com>",
     "Andreas Motl <andreas.motl@panodata.org>"
 ]
-license = "Apache 2"
+license = "Apache"
 readme = "README.rst"
 include = [
     "LICENSE",

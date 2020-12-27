@@ -15,10 +15,14 @@ It was inspired by and is compatible with the simple json datasource.
 
 https://gist.github.com/linar-jether/95ff412f9d19fdf5e51293eb0c09b850
 
+Setup
+=====
+::
 
-*********
+    pip install grafana-pandas-datasource
+
 Resources
-*********
+=========
 - https://github.com/grafana/grafana
 - https://grafana.com/grafana/plugins/grafana-simple-json-datasource
 
@@ -33,13 +37,22 @@ annotations for designating midnight times. For both, we are using NumPy.
 
     Image: Sinewave data and midnights annotations, both generated using NumPy.
 
-Setup
-=====
+
+Acquire example files
+=====================
 ::
 
-    virtualenv .venv --python=python3.8
-    source .venv/bin/activate
-    pip install -r requirements.txt
+    export EXAMPLES_BASEURL=https://raw.githubusercontent.com/panodata/grafana-pandas-datasource/0.1.0/examples
+
+    wget ${EXAMPLES_BASEURL}/sinewave-midnights/demo.py \
+        --output-document=sinewave-midnights-demo.py
+
+    wget ${EXAMPLES_BASEURL}/sinewave-midnights/datasource.json \
+        --output-document=sinewave-midnights-datasource.json
+
+    wget ${EXAMPLES_BASEURL}/sinewave-midnights/dashboard.json \
+        --output-document=sinewave-midnights-dashboard.json
+
 
 Invoke
 ======
@@ -52,8 +65,8 @@ Invoke
         grafana/grafana:7.3.6
 
     # Run Grafana Pandas Datasource demo.
-    export PYTHONPATH=$(pwd)
-    python examples/sinewave-midnights/demo.py
+    python sinewave-midnights-demo.py
+
 
 Configure
 =========
@@ -70,11 +83,11 @@ and ``examples/sinewave-midnights/dashboard.json`` into Grafana::
     http --session=grafana ${GRAFANA_URL} --auth=admin:admin
 
     # Create datasource.
-    cat examples/sinewave-midnights/datasource.json | \
+    cat sinewave-midnights-datasource.json | \
         http --session=grafana POST ${GRAFANA_URL}/api/datasources
 
     # Create dashboard.
-    cat examples/sinewave-midnights/dashboard.json | \
+    cat sinewave-midnights-dashboard.json | \
         http --session=grafana POST ${GRAFANA_URL}/api/dashboards/db
 
     open ${GRAFANA_URL}
