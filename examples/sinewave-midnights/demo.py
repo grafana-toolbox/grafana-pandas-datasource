@@ -28,6 +28,10 @@ It creates
 - a sine wave for data and
 - midnight times for annotations
 
+Setup::
+
+    pip install grafana-pandas-datasource
+
 To query the reader, use ``<reader_name>:<query_string>``, e.g.
 - ``sine_wave:24``
 - ``midnights:xx``
