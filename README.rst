@@ -67,8 +67,12 @@ Install prerequisites::
     pacman --noconfirm --sync git python3 poetry httpie docker
 
     # Fedora
-    dnf install git python3 poetry httpie docker
+    dnf install -y git python3 poetry httpie docker
     alternatives --install /usr/bin/python python /usr/bin/python3 1
+
+    # Rocky Linux
+    dnf install -y git python39 python39-pip docker
+    pip3 install poetry httpie
 
     # CentOS 7
     yum install -y git docker
@@ -76,6 +80,10 @@ Install prerequisites::
     yum --enablerepo=centos-sclo-rh -y install rh-python38
     scl enable rh-python38 bash
     pip3 install cryptography==3.3.2 poetry httpie
+
+    # CentOS 8
+    dnf install -y git python39 python39-pip docker
+    pip3 install poetry httpie
 
     # openSUSE
     zypper install git python39 python39-pip httpie docker
@@ -134,6 +142,18 @@ Credits
 
 Kudos to Linar, who conceived the initial version of this software the other
 day at https://gist.github.com/linar-jether/95ff412f9d19fdf5e51293eb0c09b850.
+
+
+
+**************
+Other projects
+**************
+
+Oz Tiram conceived a similar piece of software with Python. He uses the Bottle
+web framework.
+
+- https://gitlab.com/oz123/grafana-python-datasource
+- https://oz123.github.io/writings/2019-06-16-Visualize-almost-anything-with-Grafana-and-Python/index.html
 
 
 .. _different demo programs: https://github.com/panodata/grafana-pandas-datasource/tree/main/examples
