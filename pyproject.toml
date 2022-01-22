@@ -6,7 +6,7 @@ authors = [
     "Andreas Motl <andreas.motl@panodata.org>",
     "Linar <linar@jether-energy.com>"
 ]
-license = "Apache-2.0"
+license = "AGPL-3.0"
 readme = "README.rst"
 include = [
     "LICENSE",
@@ -30,7 +30,7 @@ classifiers = [
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
-    "License :: OSI Approved :: Apache Software License",
+    "License :: OSI Approved :: GNU Affero General Public License v3",
     "Development Status :: 4 - Beta",
     "Environment :: Console",
     "Intended Audience :: Developers",
