@@ -5,6 +5,7 @@ Changelog
 
 development
 ===========
+- Improve installation documentation
 
 
 2022-01-22 0.2.0
