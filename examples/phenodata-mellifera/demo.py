@@ -82,7 +82,7 @@ def phenodata_mellifera(dataset: str, years: tuple[int], phases: tuple[str], opt
 
     data = pd.concat(data_total)
 
-    # Create Pandas Series from Dataframe.
+    # Create pandas Series from DataFrame.
     index = data.Datum.astype('datetime64')
     values = data.Spezies.str.cat(data.Phase, sep=" - ").str.cat(data.Station, sep=" - ")
     series = pd.Series(data=values.tolist(), index=index)
@@ -99,7 +99,7 @@ def main():
     # Create Flask application.
     app = create_app()
 
-    # Register Pandas component.
+    # Register pandas component.
     app.register_blueprint(pandas_component, url_prefix="/")
 
     # Invoke Flask application.

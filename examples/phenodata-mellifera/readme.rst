@@ -43,7 +43,7 @@ Invoke
         --env='GF_SECURITY_ADMIN_PASSWORD=admin' --env='GF_INSTALL_PLUGINS=grafana-simple-json-datasource' \
         grafana/grafana:7.3.6
 
-    # Run Grafana Pandas Datasource demo.
+    # Run Grafana pandas Datasource demo.
     python phenodata-mellifera-demo.py
 
 

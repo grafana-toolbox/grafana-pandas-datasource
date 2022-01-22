@@ -19,7 +19,8 @@ methods = ('GET', 'POST')
 @cross_origin()
 def hello_world():
     print(request.headers, request.get_json())
-    return 'Jether\'s Grafana Pandas Datasource, used for rendering HTML panels and timeseries data.'
+    return 'Grafana pandas datasource: Serve NumPy data via pandas data frames to Grafana. ' \
+           'For documentation, see <a href="https://github.com/panodata/grafana-pandas-datasource">https://github.com/panodata/grafana-pandas-datasource</a>.'
 
 
 @pandas_component.route('/search', methods=methods)

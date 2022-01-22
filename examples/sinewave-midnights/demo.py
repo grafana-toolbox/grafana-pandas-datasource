@@ -13,7 +13,7 @@ from grafana_pandas_datasource.service import pandas_component
 """
 Demo for grafana-pandas-datasource.
 
-This is a demo program which generates data using NumPy and Pandas.
+This is a demo program which generates data using NumPy and pandas.
 It creates
 - a sine wave for data and
 - midnight times for annotations
@@ -25,6 +25,13 @@ Setup::
 To query the reader, use ``<reader_name>:<query_string>``, e.g.
 - ``sine_wave:24``
 - ``midnights:xx``
+
+Test drive::
+
+    python examples/sinewave-midnights/demo.py
+    echo '{"targets": [{"target": "sine_wave:24"}], "range": {"from": "2022-02-22T15", "to": "2022-02-22T20"}}' | http http://127.0.0.1:3003/query
+    echo '{"annotation": {"query": "midnights:xx"}, "range": {"from": "2022-02-20", "to": "2022-02-22"}}' | http http://127.0.0.1:3003/annotations
+
 """
 
 
@@ -53,7 +60,7 @@ def main():
     # Create Flask application.
     app = create_app()
 
-    # Register Pandas component.
+    # Register pandas component.
     app.register_blueprint(pandas_component, url_prefix="/")
 
     # Invoke Flask application.

@@ -8,6 +8,7 @@ development
 - Add example for annotating phenology data within Grafana
 - Change license to AGPL-3.0
 - Modernize dependency versions. Drop support for Python 3.6.
+- Improve sandbox environment setup and documentation
 
 
 2020-12-27 0.1.2

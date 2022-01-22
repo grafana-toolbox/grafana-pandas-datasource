@@ -19,7 +19,7 @@ def dataframe_to_response(target, df, freq=None):
         for col in df:
             response.append(_series_to_response(df[col], target))
     else:
-        abort(404, Exception('Received object is not a dataframe or series.'))
+        abort(404, Exception('Received object is not a pandas DataFrame or Series.'))
 
     return response
 
@@ -35,7 +35,7 @@ def dataframe_to_json_table(target, df):
                          'columns': df.columns.map(lambda col: {"text": col}).tolist(),
                          'rows': df.where(pd.notnull(df), None).values.tolist()})
     else:
-        abort(404, Exception('Received object is not a dataframe.'))
+        abort(404, Exception('Received object is not a pandas DataFrame.'))
 
     return response
 
@@ -53,7 +53,8 @@ def annotations_to_response(target, df):
                 #"tags": tags, # Tags for the annotation. (optional)
                 #"text": text # Text for the annotation. (optional)
             })
-    # Dataframe with annotation text/tags for each entry
+
+    # DataFrame with annotation text/tags for each entry
     elif isinstance(df, pd.DataFrame):
         for timestamp, row in df.iterrows():
             annotation = {
@@ -69,7 +70,7 @@ def annotations_to_response(target, df):
 
             response.append(annotation)
     else:
-        abort(404, Exception('Received object is not a dataframe or series.'))
+        abort(404, Exception('Received object is not a pandas DataFrame or Series.'))
 
     return response
 

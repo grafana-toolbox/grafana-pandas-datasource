@@ -12,7 +12,7 @@ from dataclasses import dataclass, field
 class DataGenerators:
     """
     Store references to data generator functions
-    yielding Pandas data frames.
+    yielding pandas data frames.
     """
 
     metric_readers: Dict[str, Callable] = field(default_factory=dict)
