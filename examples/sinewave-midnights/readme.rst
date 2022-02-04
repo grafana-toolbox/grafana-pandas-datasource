@@ -25,6 +25,7 @@ For general installation instructions, see `setup sandbox environment`_.
 **************
 Start services
 **************
+
 ::
 
     # Run Grafana.
@@ -96,4 +97,4 @@ carefully.
 
 
 .. _NumPy: https://numpy.org/
-.. _setup sandbox environment: https://github.com/panodata/grafana-pandas-datasource/blob/main/README.rst#sandbox-environment
+.. _setup sandbox environment: https://github.com/panodata/grafana-pandas-datasource/blob/main/docs/setup.rst

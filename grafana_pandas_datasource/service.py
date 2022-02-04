@@ -1,6 +1,6 @@
 """
 Copyright 2017 Linar <linar@jether-energy.com>
-Copyright 2020 Andreas Motl <andreas.motl@panodata.org>
+Copyright 2020-2022 Andreas Motl <andreas.motl@panodata.org>
 
 License: GNU Affero General Public License, Version 3
 """

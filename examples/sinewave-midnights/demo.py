@@ -26,7 +26,7 @@ To query the reader, use ``<reader_name>:<query_string>``, e.g.
 - ``sine_wave:24``
 - ``midnights:xx``
 
-Test drive::
+Synopsis::
 
     python examples/sinewave-midnights/demo.py
     echo '{"targets": [{"target": "sine_wave:24"}], "range": {"from": "2022-02-22T15", "to": "2022-02-22T20"}}' | http http://127.0.0.1:3003/query
