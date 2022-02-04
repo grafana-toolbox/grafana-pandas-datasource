@@ -89,10 +89,23 @@ Install prerequisites::
     zypper install git python39 python39-pip httpie docker
     pip3.9 install poetry
 
+    # Windows / Chocolatey
+    # https://chocolatey.org/
+    choco install git python3 poetry httpie docker-desktop docker-cli
+
 Acquire sources and bootstrap sandbox environment::
 
     git clone https://github.com/panodata/grafana-pandas-datasource
     cd grafana-pandas-datasource
+    python3 -m venv .venv
+
+    # Linux, *nix, macOS
+    source .venv/bin/activate
+
+    # Windows
+    .\venv\Scripts\activate
+
+    pip install poetry
     poetry install
     poetry shell
 
