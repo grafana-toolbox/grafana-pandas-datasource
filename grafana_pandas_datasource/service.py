@@ -17,8 +17,8 @@ methods = ('GET', 'POST')
 
 @pandas_component.route('/', methods=methods)
 @cross_origin()
-def hello_world():
-    print(request.headers, request.get_json())
+def test_datasource():
+    print(request.headers, request.get_json(silent=True))
     return 'Grafana pandas datasource: Serve NumPy data via pandas data frames to Grafana. ' \
            'For documentation, see <a href="https://github.com/panodata/grafana-pandas-datasource">https://github.com/panodata/grafana-pandas-datasource</a>.'
 
@@ -107,7 +107,7 @@ def query_annotations():
 @pandas_component.route('/panels', methods=methods)
 @cross_origin()
 def get_panel():
-    print(request.headers, request.get_json())
+    print(request.headers, request.args)
     req = request.args
 
     ts_range = {'$gt': pd.Timestamp(int(req['from']), unit='ms').to_pydatetime(),
