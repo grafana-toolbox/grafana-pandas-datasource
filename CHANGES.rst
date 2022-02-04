@@ -10,6 +10,7 @@ development
   empty HTTP request bodies but still setting ``Content-Type: application/json``.
   Thanks for the report, @byteptr and @MichielKE!
 - Improve installation instructions for Windows. Thanks, @MichielKE!
+- Improve documentation
 
 
 2022-01-22 0.2.0

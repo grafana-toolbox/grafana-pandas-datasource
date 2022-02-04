@@ -1,6 +1,6 @@
 """
 Copyright 2017 Linar <linar@jether-energy.com>
-Copyright 2020 Andreas Motl <andreas.motl@panodata.org>
+Copyright 2020-2022 Andreas Motl <andreas.motl@panodata.org>
 
 License: GNU Affero General Public License, Version 3
 """
@@ -26,5 +26,6 @@ def create_app(test_config=None) -> Flask:
     # the application on all routes, for all origins and methods.
     CORS(app)
     app.config['CORS_HEADERS'] = 'Content-Type'
+    # app.config['DEBUG'] = True
 
     return app
