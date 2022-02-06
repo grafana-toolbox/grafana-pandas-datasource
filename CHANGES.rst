@@ -15,6 +15,8 @@ development
 - Add capability for request/response logging
 - Format the code with black and isort
 - Rename ``util.py`` to ``core.py``
+- Mitigate pandas deprecation warning about the ``astype()`` method of datetimelike
+  types to convert to integer dtypes
 
 
 2022-01-22 0.2.0
