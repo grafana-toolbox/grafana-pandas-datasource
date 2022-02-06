@@ -11,13 +11,14 @@ Priority 1
 - [x] Improve documentation
 - [x] Add logging
 - [x] Format code with black and isort
-- [o] Publish new release
+- [x] Publish new release
 
 
 **********
 Priority 2
 **********
 - [o] Add software tests
+- [o] Integrate sinewave demo into codebase as "builtin:sinewave-demo"
 - [o] Expand sinewave example from ``sine_wave:24`` to, e.g. ``fn:sin(freq=24)``.
 - [o] Use ``add_panel_reader``, see https://github.com/panodata/grafana-pandas-datasource/pull/3
 
