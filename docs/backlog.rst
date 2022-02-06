@@ -17,6 +17,8 @@ Priority 1
 **********
 Priority 2
 **********
+- [o] Add an example for the "rendering HTML panels" feature,
+  see https://github.com/panodata/grafana-pandas-datasource/issues/12
 - [o] Add software tests
 - [o] Integrate sinewave demo into codebase as "builtin:sinewave-demo"
 - [o] Expand sinewave example from ``sine_wave:24`` to, e.g. ``fn:sin(freq=24)``.
