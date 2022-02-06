@@ -5,6 +5,10 @@ Changelog
 
 development
 ===========
+
+
+2022-02-06 0.3.0
+================
 - Improve installation documentation
 - Mitigate ``400 Bad Request`` responses when receiving GET requests with
   empty HTTP request bodies but still setting ``Content-Type: application/json``.
