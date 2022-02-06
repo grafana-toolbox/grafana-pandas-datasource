@@ -13,6 +13,7 @@ development
 - Improve documentation
 - Initialize Flask logger appropriately
 - Add capability for request/response logging
+- Format the code with black and isort
 
 
 2022-01-22 0.2.0

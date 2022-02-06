@@ -4,8 +4,8 @@ Copyright 2020-2022 Andreas Motl <andreas.motl@panodata.org>
 
 License: GNU Affero General Public License, Version 3
 """
-from typing import Dict, Callable
 from dataclasses import dataclass, field
+from typing import Callable, Dict
 
 
 @dataclass

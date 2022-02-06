@@ -7,9 +7,9 @@ import urllib.parse
 from datetime import datetime, timedelta
 
 import pandas as pd
-from cachetools import cached, TTLCache
+from cachetools import TTLCache, cached
 from phenodata.dwd.cdc import DwdCdcClient
-from phenodata.dwd.pheno import DwdPhenoDataHumanizer, DwdPhenoData
+from phenodata.dwd.pheno import DwdPhenoData, DwdPhenoDataHumanizer
 from phenodata.ftp import FTPSession
 from phenodata.util import read_list
 
@@ -39,8 +39,7 @@ def define_and_register_data():
     def get_mellifera_flowering(query_string, ts_range):
         query = dict(urllib.parse.parse_qsl(query_string))
         series = phenodata_mellifera(
-            dataset="immediate", years=tuple([2019, 2020, 2021]), phases=tuple([5, 7]),
-            options=tuple(query.items())
+            dataset="immediate", years=tuple([2019, 2020, 2021]), phases=tuple([5, 7]), options=tuple(query.items())
         )
         return series
 
@@ -72,18 +71,20 @@ def phenodata_mellifera(dataset: str, years: tuple[int], phases: tuple[str], opt
 
     # Get observations
     if "observations" in options["type"]:
-        data_past = client.get_observations(phenodata_options, humanize=phenodata_options['humanize'])
+        data_past = client.get_observations(phenodata_options, humanize=phenodata_options["humanize"])
         data_total.append(data_past)
 
     if "forecast" in options["type"]:
         next_year = (datetime.today() + timedelta(days=365)).year
-        data_future = client.get_forecast(phenodata_options, forecast_year=next_year, humanize=phenodata_options['humanize'])
+        data_future = client.get_forecast(
+            phenodata_options, forecast_year=next_year, humanize=phenodata_options["humanize"]
+        )
         data_total.append(data_future)
 
     data = pd.concat(data_total)
 
     # Create pandas Series from DataFrame.
-    index = data.Datum.astype('datetime64')
+    index = data.Datum.astype("datetime64")
     values = data.Spezies.str.cat(data.Phase, sep=" - ").str.cat(data.Station, sep=" - ")
     series = pd.Series(data=values.tolist(), index=index)
     series = series.sort_index(ascending=True)
@@ -103,8 +104,8 @@ def main():
     app.register_blueprint(pandas_component, url_prefix="/")
 
     # Invoke Flask application.
-    app.run(host='127.0.0.1', port=3003, debug=True)
+    app.run(host="127.0.0.1", port=3003, debug=True)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

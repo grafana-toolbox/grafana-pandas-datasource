@@ -8,7 +8,7 @@ from flask import Flask
 from flask_cors import CORS
 
 from grafana_pandas_datasource import config
-from grafana_pandas_datasource.logging import setup_logging, LoggingMiddleware
+from grafana_pandas_datasource.logging import LoggingMiddleware, setup_logging
 
 
 def create_app(test_config=None) -> Flask:
@@ -33,10 +33,10 @@ def create_app(test_config=None) -> Flask:
     # Initialize Cross Origin Resource sharing support for
     # the application on all routes, for all origins and methods.
     CORS(app)
-    app.config['CORS_HEADERS'] = 'Content-Type'
+    app.config["CORS_HEADERS"] = "Content-Type"
 
     # Optionally enable HTTP conversation tracing.
-    if app.config.get('TRACE_CONVERSATION'):
+    if app.config.get("TRACE_CONVERSATION"):
         app.wsgi_app = LoggingMiddleware(app.wsgi_app)
 
     return app
