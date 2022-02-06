@@ -4,8 +4,9 @@ Copyright 2020 Andreas Motl <andreas.motl@panodata.org>
 
 License: GNU Affero General Public License, Version 3
 """
-import pandas as pd
 import numpy as np
+import pandas as pd
+
 from grafana_pandas_datasource import create_app
 from grafana_pandas_datasource.registry import data_generators as dg
 from grafana_pandas_datasource.service import pandas_component
@@ -40,12 +41,14 @@ def define_and_register_data():
     # Sample timeseries reader.
     def get_sine(freq, ts_range):
         freq = int(freq)
-        ts = pd.date_range(ts_range['$gt'], ts_range['$lte'], freq='H')
-        return pd.Series(np.sin(np.arange(len(ts)) * np.pi * freq * 2 / float(len(ts))), index=ts).to_frame('value')
+        ts = pd.date_range(ts_range["$gt"], ts_range["$lte"], freq="H")
+        return pd.Series(np.sin(np.arange(len(ts)) * np.pi * freq * 2 / float(len(ts))), index=ts).to_frame("value")
 
     # Sample annotation reader.
     def get_midnights(query_string, ts_range):
-        return pd.Series(index=pd.date_range(ts_range['$gt'], ts_range['$lte'], freq='D', normalize=True), dtype='float64').fillna('Text for annotation - midnight')
+        return pd.Series(
+            index=pd.date_range(ts_range["$gt"], ts_range["$lte"], freq="D", normalize=True), dtype="float64"
+        ).fillna("Text for annotation - midnight")
 
     # Register data generators.
     dg.add_metric_reader("sine_wave", get_sine)
@@ -64,8 +67,8 @@ def main():
     app.register_blueprint(pandas_component, url_prefix="/")
 
     # Invoke Flask application.
-    app.run(host='127.0.0.1', port=3003, debug=True)
+    app.run(host="127.0.0.1", port=3003, debug=True)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

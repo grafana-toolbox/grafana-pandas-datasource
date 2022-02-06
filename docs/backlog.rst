@@ -8,9 +8,9 @@ Priority 1
 **********
 - [x] Adjust HTML index page
 - [x] Add documentation for installation on Windows
-- [o] Improve documentation
-- [o] Add logging
-- [o] Format code with black and isort
+- [x] Improve documentation
+- [x] Add logging
+- [x] Format code with black and isort
 - [o] Publish new release
 
 
