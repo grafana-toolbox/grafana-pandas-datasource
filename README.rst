@@ -1,21 +1,21 @@
 .. image:: https://img.shields.io/pypi/pyversions/grafana-pandas-datasource.svg
     :target: https://pypi.org/project/grafana-pandas-datasource/
 
-.. image:: https://img.shields.io/pypi/status/grafana-pandas-datasource.svg
-    :target: https://pypi.org/project/grafana-pandas-datasource/
+.. image:: https://img.shields.io/badge/Grafana-6.x%20--%208.x-blue.svg
+    :target: https://github.com/grafana/grafana
+    :alt: Supported Grafana versions
 
 .. image:: https://img.shields.io/pypi/v/grafana-pandas-datasource.svg
-    :target: https://pypi.org/project/grafana-pandas-datasource/
-
-.. image:: https://img.shields.io/pypi/dm/grafana-pandas-datasource.svg
     :target: https://pypi.org/project/grafana-pandas-datasource/
 
 .. image:: https://img.shields.io/pypi/l/grafana-pandas-datasource.svg
     :target: https://github.com/panodata/grafana-pandas-datasource/blob/main/LICENSE
 
-.. image:: https://img.shields.io/badge/Grafana-6.x%20--%208.x-blue.svg
-    :target: https://github.com/grafana/grafana
-    :alt: Supported Grafana versions
+.. image:: https://img.shields.io/pypi/status/grafana-pandas-datasource.svg
+    :target: https://pypi.org/project/grafana-pandas-datasource/
+
+.. image:: https://img.shields.io/pypi/dm/grafana-pandas-datasource.svg
+    :target: https://pypi.org/project/grafana-pandas-datasource/
 
 |
 
