@@ -4,6 +4,7 @@ Copyright 2020-2022 Andreas Motl <andreas.motl@panodata.org>
 
 License: GNU Affero General Public License, Version 3
 """
+from flask import current_app
 from flask import Blueprint, request, jsonify, abort
 from flask_cors import cross_origin
 import pandas as pd
@@ -18,7 +19,7 @@ methods = ('GET', 'POST')
 @pandas_component.route('/', methods=methods)
 @cross_origin()
 def test_datasource():
-    print(request.headers, request.get_json(silent=True))
+    current_app.logger.info('Request to "test_datasource" endpoint at /')
     return 'Grafana pandas datasource: Serve NumPy data via pandas data frames to Grafana. ' \
            'For documentation, see <a href="https://github.com/panodata/grafana-pandas-datasource">https://github.com/panodata/grafana-pandas-datasource</a>.'
 
@@ -26,7 +27,7 @@ def test_datasource():
 @pandas_component.route('/search', methods=methods)
 @cross_origin()
 def find_metrics():
-    print(request.headers, request.get_json())
+    current_app.logger.info('Request to "find_metrics" endpoint at /search')
     req = request.get_json()
 
     target = req.get('target', '*')
@@ -52,7 +53,7 @@ def find_metrics():
 @pandas_component.route('/query', methods=methods)
 @cross_origin(max_age=600)
 def query_metrics():
-    print(request.headers, request.get_json())
+    current_app.logger.info('Request to "query_metrics" endpoint at /query')
     req = request.get_json()
 
     results = []
@@ -85,7 +86,7 @@ def query_metrics():
 @pandas_component.route('/annotations', methods=methods)
 @cross_origin(max_age=600)
 def query_annotations():
-    print(request.headers, request.get_json())
+    current_app.logger.info('Request to "query_annotations" endpoint at /annotations')
     req = request.get_json()
 
     results = []
@@ -107,7 +108,7 @@ def query_annotations():
 @pandas_component.route('/panels', methods=methods)
 @cross_origin()
 def get_panel():
-    print(request.headers, request.args)
+    current_app.logger.info('Request to "get_panel" endpoint at /panels')
     req = request.args
 
     ts_range = {'$gt': pd.Timestamp(int(req['from']), unit='ms').to_pydatetime(),
