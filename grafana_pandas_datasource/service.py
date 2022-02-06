@@ -9,7 +9,7 @@ from flask import Blueprint, abort, current_app, jsonify, request
 from flask_cors import cross_origin
 
 from grafana_pandas_datasource.registry import data_generators as dg
-from grafana_pandas_datasource.util import (
+from grafana_pandas_datasource.core import (
     annotations_to_response,
     dataframe_to_json_table,
     dataframe_to_response,

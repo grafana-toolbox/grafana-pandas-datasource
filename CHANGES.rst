@@ -14,6 +14,7 @@ development
 - Initialize Flask logger appropriately
 - Add capability for request/response logging
 - Format the code with black and isort
+- Rename ``util.py`` to ``core.py``
 
 
 2022-01-22 0.2.0
