@@ -11,6 +11,7 @@ development
   Thanks for the report, @byteptr and @MichielKE!
 - Improve installation instructions for Windows. Thanks, @MichielKE!
 - Improve documentation
+- Initialize Flask logger appropriately
 
 
 2022-01-22 0.2.0

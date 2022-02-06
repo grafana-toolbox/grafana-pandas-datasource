@@ -7,6 +7,8 @@ License: GNU Affero General Public License, Version 3
 from flask import Flask
 from flask_cors import CORS
 
+from grafana_pandas_datasource.logging import setup_logging
+
 
 def create_app(test_config=None) -> Flask:
     """
@@ -18,6 +20,8 @@ def create_app(test_config=None) -> Flask:
     :param test_config:
     :return: Configured Flask application.
     """
+
+    setup_logging()
 
     # Create Flask application.
     app = Flask(__name__)
