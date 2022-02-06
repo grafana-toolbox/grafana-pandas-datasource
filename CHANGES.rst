@@ -12,6 +12,7 @@ development
 - Improve installation instructions for Windows. Thanks, @MichielKE!
 - Improve documentation
 - Initialize Flask logger appropriately
+- Add capability for request/response logging
 
 
 2022-01-22 0.2.0
