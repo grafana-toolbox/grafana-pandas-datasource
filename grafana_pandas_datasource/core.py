@@ -98,7 +98,7 @@ def _series_to_response(df, target):
 
     sorted_df = df.dropna().sort_index()
 
-    timestamps = (sorted_df.index.astype(np.int64) // 10**6).values.tolist()
+    timestamps = (sorted_df.index.view(np.int64) // 10**6).tolist()
 
     values = sorted_df.values.tolist()
 
